@@ -1,0 +1,25 @@
+<div class="col-md-12 col-12">
+  <table id="tblOrders" class="table table-bordered table-hover">
+    <thead>
+    <tr>
+      <th>Order ID</th>
+      <th>Order Date</th>
+      <th>Total Price</th>
+      <th>Customer Id</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ord of ords">
+        <td>{{ord.oId}}</td>
+        <td>{{ord.date}}</td>
+        <td>{{ord.totalPrice}}</td>
+        <td>{{ord.customerId}}</td>
+        <td></td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+      </tr>
+      </tfoot>
+  </table>
+</div> 

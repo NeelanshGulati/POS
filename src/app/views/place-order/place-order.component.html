@@ -1,0 +1,142 @@
+<!-- Main content -->
+<div class="col-md-12 order-md-1">
+  <h4 class="mb-3"><strong>Place Order</strong></h4>
+  <!-- {{order | json}}
+  {{product | json}} -->
+  <form #frmItems="ngForm"  class="needs-validation">
+    <div class="row">
+      <div class="col-md-2 form-group">
+        <label for="customerId">Customer Id</label>
+        <select type="number" class="form-control" name="customerId" [(ngModel)]="order.customerId">
+               <option value="">Choose...</option>
+               <option *ngFor="let customer of cuts">{{customer.employeeCode}}</option>
+        </select>
+      </div>
+
+      <!-- <input type="number" class="form-control" name="customerId"
+               [(ngModel)]="order.customerId"> -->
+      <div class="col-md-2 form-group">
+        <label for="orderid">Order ID</label>
+        <input  type="text" required  #id="ngModel" [class.is-invalid]="id.invalid && id.touched" class="form-control" [(ngModel)]="order.oId" name="orderid" >
+        <small class="text-danger" [class.d-none]="id.valid||id.untouched">Id is required</small>
+      </div>
+
+      <div class="col-md-2 offset form-group">
+        <label for="orderDate">Order Date</label>
+        <input type="text" required  #date="ngModel" [class.is-invalid]="date.invalid && date.touched" class="form-control" [(ngModel)]="order.date" name="orderDate">
+        <small class="text-danger" [class.d-none]="date.valid||date.untouched">Date is required</small>
+      </div>
+      <div class="col-md-2 form-group">
+        <label for="tax">Tax</label>
+        <input [disabled]="true" type="text" class="form-control" name="tax" value="100">
+
+      </div>  
+      <div class="col-md-2  form-group">
+        <label for="tax">TotalPrice</label>
+        <input type="text" [disabled]="true" [(ngModel)]="order.totalPrice" class="form-control" name="totalPrice">
+
+      </div>  
+    </div>
+
+
+      <div class="row">
+
+
+        <div class="col-md-2 mb-3 form-group">
+          <label for="productId">Product Id</label>
+          <select (change)="getProductById($event)" type="number" class="form-control" name="productId"
+                 [(ngModel)]="product.id">
+                 <option value="">Choose...</option>
+                 <option *ngFor="let prod of prods">{{prod.id}}</option>
+          </select>
+        </div>
+
+        <div class="col-md-3 mb-3 form-group">
+          <label for="Name">Product Name</label>
+          <input type="text" required #name="ngModel" [class.is-invalid]="name.invalid && name.touched" class="form-control" name="Name"
+                 [(ngModel)]="product.name">
+                <small class="text-danger" [class.d-none]="name.valid||name.untouched">Product name is required</small>
+        </div>
+
+        <div class="col-md-2 mb-3 form-group">
+          <label for="unicprice">Product Price</label>
+          <input type="text" class="form-control" name="unicprice"
+                 [(ngModel)]="product.price">
+
+        </div>
+
+
+        <div class="col-md-2 mb-3 form-group">
+          <label for="Qty On Hand">Product Stock</label>
+          <input type="text" class="form-control" [(ngModel)]="product.stock" name="Qty On Hand">
+
+
+        </div>
+        <div class="col-md-1 mb-3 form-group">
+          <div class="row">
+            <label for="qty">Quantity</label>
+            <input type="text" required  #qty="ngModel" [class.is-invalid]="qty.invalid && qty.touched" class="form-control" pattern="^\d+$" [(ngModel)]="quantity" name="qty">
+            <small class="text-danger" [class.d-none]="qty.valid||qty.untouched">Quantity is required and should be positive</small>
+          </div>
+         
+
+        </div>
+        <div class="col-md-1 mb-3 form-group">
+        <div class="card-body button">
+          <button class="btn btn-primary " [disabled]="frmItems.form.invalid" (click)="totalPrice()">TotalPrice</button>
+        </div>
+      </div>
+     </div> 
+
+    </form>
+
+
+
+
+
+
+    <div class="col-md-12 col-12">
+      <table id="tblCustomers" class="table table-bordered table-hover">
+        <thead>
+        <tr>
+          <th>Product Id</th>
+          <th>Product Name</th>
+          <th>Unit Price</th>
+          <th>Quantity Bought</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>{{product.id}}</td>
+          <td>{{product.name}}</td>
+          <td>{{product.price}}</td>
+          <td>{{quantity}}</td>
+          <td></td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+
+        </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <div class="row">
+      <!-- <div class="col-md-3 offset-md-3"></div>
+      <div class="col-md-3 offset-md-3">
+        <button for="total"><h3>Total</h3></button>
+        <input type="text"  id="total" placeholder="" name="total" value="{{FullTotal}}" required>
+      </div> -->
+    </div>
+
+
+
+
+    <div class="card-footer text-muted">
+      <hr class="mb-4">
+      <button (click)="integrated()" [disabled]="frmItems.form.invalid" class="btn btn-success btn-lg btn-block" > Place Order</button>
+    </div>
+
+</div>

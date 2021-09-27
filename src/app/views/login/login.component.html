@@ -1,0 +1,35 @@
+<div class="login-box">
+  <div class="login-logo">
+    <b>POS</b>
+  </div>
+ 
+ 
+
+      <form #formLogin="ngForm"
+         (ngSubmit)="authenticateUser()">
+         <!-- {{formLogin.value | json}}
+         <hr />
+          <br>
+         {{userFront | json}} -->
+        <div class="form-group">
+          <input  name="txtUserName" required  #name="ngModel" [class.is-invalid]="name.invalid && name.touched" type="text" [(ngModel)]="userFront.username"  class="form-control" placeholder="Username">
+          <span class="fa fa-user form-control-feedback"></span>&nbsp;<small class="text-danger" [class.d-none]="name.valid||name.untouched">Username is required</small>
+        </div>
+        <div class="form-group">
+          <input name="txtPassword"  required  #pass="ngModel" [class.is-invalid]="pass.invalid && pass.touched" type="password" [(ngModel)]="userFront.password"  class="form-control" placeholder="Password">
+          <span class="fa fa-lock form-control-feedback"></span>&nbsp;<small class="text-danger" [class.d-none]="pass.valid||pass.untouched">Password is required</small>
+        </div>  
+        <div class="form-group">
+        <input  name="txtUserCash" type="number" [(ngModel)]="userFront.cash"  class="form-control" placeholder="Cash in drawer">
+      </div>
+      <div class="row">
+        <!-- /.col -->
+        <div class="col-12">
+          <button type="submit"  [disabled]="formLogin.form.invalid" class="btn btn-primary btn-block btn-flat">Sign In</button>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+
+    
+      

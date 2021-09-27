@@ -1,0 +1,100 @@
+<!-- Content Header (Page header) -->
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 cslass="m-0 text-dark">Manage Customers</h1>
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active">Manage Customers</li>
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6 col-12">
+
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Customer Information</h3>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <div class="row">
+              <div class="col col-s12">
+                <form #frmCustomers="ngForm" (ngSubmit)="addCustomer()">
+                  <p class="form-group">
+                    <label for="txtId">Customer Code</label>
+                    <input name="txtId" required #code="ngModel" pattern="^\d+$" [class.is-invalid]="code.invalid && code.touched" id="txtId" [(ngModel)]="customer.employeeCode" class="form-control" >
+                  </p>
+                  <small class="text-danger" [class.d-none]="code.valid||code.untouched">Code is required and should be positive integer</small>
+
+                  <p class="form-group">
+                    <label for="txtName">Customer Name</label>
+                    <input name="txtName" required  #name="ngModel" [class.is-invalid]="name.invalid && name.touched" id="txtName" [(ngModel)]="customer.employeeName" class="form-control">
+                  </p>
+                  <small class="text-danger" [class.d-none]="name.valid||name.untouched">Username is required</small>
+
+                  <p class="form-group">
+                    <label for="txtLocation">Customer Location</label>
+                    <input name="txtLocation" required  #loc="ngModel" [class.is-invalid]="loc.invalid && loc.touched" id="txtLocation" [(ngModel)]="customer.location" class="form-control">
+                  </p>
+                  <small class="text-danger" [class.d-none]="loc.valid||loc.untouched">Location is required</small>
+
+                  <p class="form-group">
+                    <label for="txtDOB">Customer DOB</label>
+                    <input name="txtDOB" required  #dob="ngModel" [class.is-invalid]="dob.invalid && dob.touched" id="txtDOB" [(ngModel)]="customer.dateOfBirth" class="form-control">
+                  </p>
+                  <small class="text-danger" [class.d-none]="dob.valid||dob.untouched">DOB is required</small>
+
+                  <p class="form-group">
+                    <label for="txtAddress">Customer Email</label>
+                    <input name="txtAddress" required  #mail="ngModel" [class.is-invalid]="mail.invalid && mail.touched" id="txtAddress" [(ngModel)]="customer.email" class="form-control">
+                  </p>
+                  <small class="text-danger" [class.d-none]="mail.valid||mail.untouched">Email is required</small>
+                  <div>
+                    <button type="submit" [disabled]="frmCustomers.form.invalid" class="btn btn-primary">Save</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+
+      </div>
+      <div class="col-md-6 col-12">
+        <table id="tblCustomers" class="table table-bordered table-hover">
+          <thead>
+          <tr>
+            <th>Customer Code</th>
+            <th>Customer Name</th>
+            <th>Customer Email</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let cust of cuts">
+            <td>{{cust.employeeCode}}</td>
+            <td>{{cust.employeeName}}</td>
+            <td>{{cust.email}}</td>
+            <td>
+              <button (click)="deleteCustomer(cust.employeeCode)" class="fa fa-trash fa-2x"></button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+
